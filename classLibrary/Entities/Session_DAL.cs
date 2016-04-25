@@ -9,9 +9,11 @@ namespace classLibrary.Entities
 {
 	public class Session_DAL:Entity_DAL
 	{
-		public TimePeriod_DAL Period { get; set; }
-		public TutorStudent_DAL Tutor { get; set; }
-		public HelpedStudent_DAL Helped { get; set; }
+		[Key]
+		public int Id { get; set; }
+		public int PeriodKey { get; set; }
+		public int TutorKey { get; set; }
+		public int HelpedKey { get; set; }
 
 	}
 }

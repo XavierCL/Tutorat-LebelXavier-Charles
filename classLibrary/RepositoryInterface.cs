@@ -17,8 +17,8 @@ namespace classLibrary
 
 		void removeAll();
 
-		void update(_ty tutor);
+		void update(_ty item);
 
-		void addTutor(_ty tutor);
+		void addObject(_ty item);
 	}
 }

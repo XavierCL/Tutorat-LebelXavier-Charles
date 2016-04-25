@@ -12,10 +12,10 @@ namespace testUtility
 {
     public class TestDataSeeder
     {
-		EFRepository<TutorStudent_DAL> _tutors;
-		EFRepository<HelpedStudent_DAL> _helpeds;
-		EFRepository<Session_DAL> _sessions;
-		EFRepository<TimePeriod_DAL> _periods;
+		public EFRepository<TutorStudent_DAL> _tutors;
+		public EFRepository<HelpedStudent_DAL> _helpeds;
+		public EFRepository<Session_DAL> _sessions;
+		public EFRepository<TimePeriod_DAL> _periods;
 		public TestDataSeeder()
 		{
 			DbContext _context = new EFTutoringDBContext();
@@ -25,31 +25,45 @@ namespace testUtility
 			_periods = new EFRepository<TimePeriod_DAL>(_context);
 		}
 
-		public void addSeeds()
+		public void addTutors()
 		{
 			TutorStudent_DAL t1 = new TutorStudent_DAL()
 			{
 				Number=144072,
 				LastName="C17"
 			};
-			_myRepo.addTutor(t1);
+			_tutors.addTutor(t1);
 			TutorStudent_DAL t2 = new TutorStudent_DAL()
 			{
 				Number = 1442344072,
 				LastName = "Julw"
 			};
-			_myRepo.addTutor(t2);
+			_tutors.addTutor(t2);
 			TutorStudent_DAL t3 = new TutorStudent_DAL()
 			{
 				Number = 72,
 				LastName = "Julw"
 			};
-			_myRepo.addTutor(t3);
+			_tutors.addTutor(t3);
+		}
+
+		public void addTutor(int number, string lastName, string firstName, string mail, IEnumerable<TimePeriod_DAL> period)
+		{
+			_tutors.addObject(new TutorStudent_DAL(){
+				Number=number,
+				LastName=lastName,
+				FirstName=firstName,
+				Mail=mail,
+				Period=period
+			});
 		}
 
 		public void removeAll()
 		{
-			_myRepo.removeAll();
+			_tutors.removeAll();
+			_helpeds.removeAll();
+			_periods.removeAll();
+			_sessions.removeAll();
 		}
     }
 }

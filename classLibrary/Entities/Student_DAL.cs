@@ -13,6 +13,6 @@ namespace classLibrary.Entities
 		public String FirstName { get; set; }
 		public String LastName { get; set; }
 		public String Mail { get; set; }
-		public TimePeriod_DAL Period { get; set; }
+		public IEnumerable<int> PeriodKey { get; set; }
 	}
 }

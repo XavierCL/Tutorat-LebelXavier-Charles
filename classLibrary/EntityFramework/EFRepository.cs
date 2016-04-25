@@ -40,16 +40,16 @@ namespace classLibrary.EntityFramework
 			_context.SaveChanges();
 		}
 
-		public void update(_ty tutor)
+		public void update(_ty item)
 		{
-			_context.Set<_ty>().Attach(tutor);
-			_context.Entry(tutor).State = EntityState.Modified;
+			_context.Set<_ty>().Attach(item);
+			_context.Entry(item).State = EntityState.Modified;
 			_context.SaveChanges();
 		}
 
-		public void addTutor(_ty tutor)
+		public void addObject(_ty item)
 		{
-			_context.Set<_ty>().Add(tutor);
+			_context.Set<_ty>().Add(item);
 			_context.SaveChanges();
 		}
 	}

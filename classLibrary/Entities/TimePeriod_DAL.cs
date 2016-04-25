@@ -9,7 +9,9 @@ namespace classLibrary.Entities
 {
 	public class TimePeriod_DAL:Entity_DAL
 	{
-		private enum WeekDay
+		[Key]
+		public int Id { get; set; }
+		public enum WeekDay
 		{
 			Monday,
 			Tuesday,

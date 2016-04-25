@@ -11,3 +11,16 @@ C:\Users\Xavier\Projects\C#\Test1\classLibrary\bin\Debug\EntityFramework.SqlServ
 C:\Users\Xavier\Projects\C#\Test1\classLibrary\bin\Debug\EntityFramework.SqlServerCompact.xml
 C:\Users\Xavier\Projects\C#\Test1\classLibrary\obj\Debug\classLibrary.dll
 C:\Users\Xavier\Projects\C#\Test1\classLibrary\obj\Debug\classLibrary.pdb
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\obj\Debug\classLibrary.dll
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\obj\Debug\classLibrary.pdb
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\bin\Debug\classLibrary.dll.config
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\bin\Debug\classLibrary.dll
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\bin\Debug\classLibrary.pdb
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\bin\Debug\EntityFramework.dll
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\bin\Debug\EntityFramework.xml
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Xavier\Projects\C#\Tutorat-LebelXavier-Charles\classLibrary\bin\Debug\EntityFramework.SqlServerCompact.xml

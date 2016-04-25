@@ -15,7 +15,7 @@ namespace DomainLayer
 		public string LastName { get; set; }
 		public string FirstName { get; set; }
 		public string Mail { get; set; }
-		public TimePeriod Period { get; set; }
+		public IEnumerable<int> PeriodKey { get; set; }
 		//services mothodes
     }
 }

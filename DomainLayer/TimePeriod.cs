@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace classLibrary.Entities
+namespace DomainLayer
 {
 	public class TimePeriod
 	{
-		private enum WeekDay
+		public enum WeekDay
 		{
 			Monday,
 			Tuesday,
