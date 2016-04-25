@@ -1,0 +1,15 @@
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\obj\Debug\DomainLayer.csprojResolveAssemblyReference.cache
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\bin\Debug\DomainLayer.dll.config
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\bin\Debug\DomainLayer.dll
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\bin\Debug\DomainLayer.pdb
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\bin\Debug\classLibrary.dll
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\bin\Debug\EntityFramework.dll
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\bin\Debug\EntityFramework.SqlServerCompact.dll
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\bin\Debug\System.Data.SqlServerCe.dll
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\bin\Debug\classLibrary.pdb
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\bin\Debug\EntityFramework.xml
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\bin\Debug\EntityFramework.SqlServerCompact.xml
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\obj\Debug\DomainLayer.dll
+C:\Users\Xavier\Projects\C#\Test1\DomainLayer\obj\Debug\DomainLayer.pdb
