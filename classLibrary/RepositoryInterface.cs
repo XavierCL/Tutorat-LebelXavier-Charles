@@ -9,7 +9,6 @@ namespace classLibrary
 {
 	public interface RepositoryInterface<_ty> where _ty : Entity_DAL
 	{
-
 		IQueryable<_ty> GetAll();
 
 		_ty getById(int id);

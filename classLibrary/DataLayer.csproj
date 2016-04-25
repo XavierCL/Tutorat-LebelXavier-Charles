@@ -56,8 +56,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Entities\Entity_DAL.cs" />
+    <Compile Include="Entities\Session_DAL.cs" />
+    <Compile Include="Entities\TimePeriod_DAL.cs" />
+    <Compile Include="Entities\Student_DAL.cs" />
+    <Compile Include="Entities\HelpedStudent_DAL.cs" />
     <Compile Include="Entities\TutorStudent_DAL.cs" />
     <Compile Include="EntityFramework\EFRepository.cs" />
     <Compile Include="EntityFramework\EFTutoringDBContext.cs" />

@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace classLibrary.Entities
 {
-	public class TutorStudent_DAL:Student_DAL
+	public abstract class HelpedStudent_DAL:Student_DAL
 	{
 	}
 }

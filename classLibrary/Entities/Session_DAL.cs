@@ -7,7 +7,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace classLibrary.Entities
 {
-	public class TutorStudent_DAL:Student_DAL
+	public class Session_DAL:Entity_DAL
 	{
+		public TimePeriod_DAL Period { get; set; }
+		public TutorStudent_DAL Tutor { get; set; }
+		public HelpedStudent_DAL Helped { get; set; }
+
 	}
 }

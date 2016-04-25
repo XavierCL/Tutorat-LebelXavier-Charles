@@ -11,9 +11,9 @@ namespace classLibrary.EntityFramework
 {
 	public class EFRepository<_ty>:RepositoryInterface<_ty> where _ty:Entity_DAL
 	{
-		private readonly EFTutoringDBContext _context;
+		private readonly DbContext _context;
 
-		public EFRepository(EFTutoringDBContext context)
+		public EFRepository(DbContext context)
 		{
 			_context = context;
 		}
