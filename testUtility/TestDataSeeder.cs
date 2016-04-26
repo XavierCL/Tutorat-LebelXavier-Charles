@@ -25,37 +25,78 @@ namespace testUtility
 			_periods = new EFRepository<TimePeriod_DAL>(_context);
 		}
 
-		public void addTutors()
+		public void addSeeds()
 		{
-			TutorStudent_DAL t1 = new TutorStudent_DAL()
-			{
-				Number=144072,
-				LastName="C17"
-			};
-			_tutors.addTutor(t1);
-			TutorStudent_DAL t2 = new TutorStudent_DAL()
-			{
-				Number = 1442344072,
-				LastName = "Julw"
-			};
-			_tutors.addTutor(t2);
-			TutorStudent_DAL t3 = new TutorStudent_DAL()
-			{
-				Number = 72,
-				LastName = "Julw"
-			};
-			_tutors.addTutor(t3);
+			addDisponibilities();
+			addTutors();
+			//addHelpeds();
+			//addSessions();
 		}
 
-		public void addTutor(int number, string lastName, string firstName, string mail, IEnumerable<TimePeriod_DAL> period)
+		public void addDisponibilities()
+		{
+			addDisponibility(TimePeriod_DAL.WeekDay.Monday, 13, 15);
+			addDisponibility(TimePeriod_DAL.WeekDay.Wednsday, 12, 14);
+			addDisponibility(TimePeriod_DAL.WeekDay.Friday, 8, 12);
+			addDisponibility(TimePeriod_DAL.WeekDay.Monday, 10, 12);
+			addDisponibility(TimePeriod_DAL.WeekDay.Monday, 16, 18);
+			addDisponibility(TimePeriod_DAL.WeekDay.Thursday, 16, 17);
+			addDisponibility(TimePeriod_DAL.WeekDay.Friday, 12, 16);
+		}
+
+		public void addTutors()
+		{
+			List<int> dispo1 = new List<int>();
+			//TODO: get IENUmerable <int> from get ids method
+			dispo1.Add(getDisponibilityId(TimePeriod_DAL.WeekDay.Monday, 13));
+			dispo1.Add(getDisponibilityId(TimePeriod_DAL.WeekDay.Monday, 14));
+			dispo1.Add(getDisponibilityId(TimePeriod_DAL.WeekDay.Wednsday, 12));
+			dispo1.Add(getDisponibilityId(TimePeriod_DAL.WeekDay.Wednsday, 13));
+			addTutor(11111, "Gagnon", "Éric", "EG1@yopmail.com", dispo1);
+			List<int> dispo2 = new List<int>();
+			dispo2.Add(getDisponibilityId(TimePeriod_DAL.WeekDay.Wednsday, 12));
+			dispo2.Add(getDisponibilityId(TimePeriod_DAL.WeekDay.Wednsday, 13));
+			addTutor(22222, "Hamel", "Isabelle", "IH1@yopmail.com", dispo2);
+			List<int> dispo3 = new List<int>();
+			dispo3.Add(getDisponibilityId(TimePeriod_DAL.WeekDay.Wednsday, 12));
+			dispo3.Add(getDisponibilityId(TimePeriod_DAL.WeekDay.Wednsday, 13));
+			addTutor(22222, "Simard", "Léo", "LS1@yopmail.com", dispo3);
+			List<int> dispo4 = new List<int>();
+			dispo4.Add(getDisponibilityId(TimePeriod_DAL.WeekDay.Monday, 13));
+			dispo4.Add(getDisponibilityId(TimePeriod_DAL.WeekDay.Monday, 14)); 
+
+			addTutor(33333, "Lepage", "Marc", "ML1@yopmail.com", dispo4);
+		}
+
+		public void addTutor(int number, string lastName, string firstName, string mail, IEnumerable<int> period)
 		{
 			_tutors.addObject(new TutorStudent_DAL(){
 				Number=number,
 				LastName=lastName,
 				FirstName=firstName,
 				Mail=mail,
-				Period=period
+				PeriodKey=period
 			});
+		}
+
+		public void addDisponibility(TimePeriod_DAL.WeekDay day, int begin, int end)
+		{
+			while (begin < end)
+			{
+				_periods.addObject(new TimePeriod_DAL() { Day = day, Hour = begin });
+				++begin;
+			}
+		}
+
+		public int getDisponibilityId(TimePeriod_DAL.WeekDay day, int hour)
+		{
+			var list = _periods.GetAll();
+			foreach (var period in list)
+			{
+				if (period.Day == day && period.Hour == hour) return period.Id;
+			}
+			_periods.addObject(new TimePeriod_DAL(){Day=day, Hour=hour});
+			return getDisponibilityId(day, hour);
 		}
 
 		public void removeAll()

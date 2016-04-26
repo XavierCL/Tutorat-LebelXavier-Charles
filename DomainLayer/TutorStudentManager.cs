@@ -21,7 +21,7 @@ namespace DomainLayer
 		public void registerTutor(TutorStudent tutor)
 		{
 			//validation
-			_tutorRepo.addTutor(new TutorStudent_DAL() { Number = tutor.Numbre, LastName = tutor.LastName });
+			_tutorRepo.addObject(new TutorStudent_DAL() { Number = tutor.Numbre, LastName = tutor.LastName });
 		}
 
 		public IQueryable<TutorStudent> getAll()
