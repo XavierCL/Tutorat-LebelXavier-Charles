@@ -4,25 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace classLibrary.Entities
 {
 	public class TimePeriod_DAL:Entity_DAL
 	{
-		[Key]
-		public int Id { get; set; }
-		public enum WeekDay
-		{
-			Monday,
-			Tuesday,
-			Wednsday,
-			Thursday,
-			Friday,
-			Saturday,
-			Sunday
-		};
-
-		public WeekDay Day { get; set; }
+		public DayOfWeek Day { get; set; }
 		public int Hour { get; set; }
+
+		public Nullable<int> Student_DALId { get; set; }
+		public virtual Student_DAL Student_DAL { get; set; }
 	}
 }

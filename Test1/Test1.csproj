@@ -58,10 +58,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\HelpedControl.cs" />
     <Compile Include="Controller\TutorControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewObjects\TutorVO.cs" />
+    <Compile Include="ViewObjects\Student2Hours.cs" />
+    <Compile Include="ViewObjects\StudentHoursVO.cs" />
+    <Compile Include="ViewObjects\SessionVO.cs" />
+    <Compile Include="ViewObjects\TimePeriodVO.cs" />
+    <Compile Include="ViewObjects\StudentVO.cs" />
+    <Compile Include="ViewObjects\TutorHelpedPeriodVO.cs" />
+    <Compile Include="View\TutorHelpedPeriodView.cs" />
+    <Compile Include="View\SessionView.cs" />
+    <Compile Include="View\PeriodTutorView.cs" />
+    <Compile Include="View\Student2HoursView.cs" />
+    <Compile Include="View\WorkedHoursView.cs" />
+    <Compile Include="View\HelpingView.cs" />
     <Compile Include="View\TutoringView.cs" />
   </ItemGroup>
   <ItemGroup>

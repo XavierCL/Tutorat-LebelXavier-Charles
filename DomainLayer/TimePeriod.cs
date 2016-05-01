@@ -9,18 +9,13 @@ namespace DomainLayer
 {
 	public class TimePeriod
 	{
-		public enum WeekDay
-		{
-			Monday,
-			Tuesday,
-			Wednsday,
-			Thursday,
-			Friday,
-			Saturday,
-			Sunday
-		};
-
-		public WeekDay Day { get; set; }
+		public DayOfWeek Day { get; set; }
 		public int Hour { get; set; }
+		public Student Student { get; set; }
+
+		public bool equals(TimePeriod other)
+		{
+			return Day == other.Day && Hour == other.Hour;
+		}
 	}
 }

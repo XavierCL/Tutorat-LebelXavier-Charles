@@ -9,9 +9,9 @@ namespace Test1.View
 {
 	class TutoringView
 	{
-		private IEnumerable<TutorVO> _tutorList;
+		private IEnumerable<StudentVO> _tutorList;
 
-		public TutoringView(IEnumerable<TutorVO> tutorList)
+		public TutoringView(IEnumerable<StudentVO> tutorList)
 		{
 			_tutorList = tutorList;
 		}
@@ -20,7 +20,7 @@ namespace Test1.View
 		{
 			foreach (var tutor in _tutorList)
 			{
-				Console.Write("\nMatricule: " + tutor._matricule + "\nNom: " + tutor._nom + "\n");
+				Console.Write(tutor.ToString());
 			}
 		}
 	}

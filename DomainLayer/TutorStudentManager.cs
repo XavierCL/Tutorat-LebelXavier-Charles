@@ -20,8 +20,24 @@ namespace DomainLayer
 
 		public void registerTutor(TutorStudent tutor)
 		{
-			//validation
-			_tutorRepo.addObject(new TutorStudent_DAL() { Number = tutor.Numbre, LastName = tutor.LastName });
+			_tutorRepo.addObject(
+				new TutorStudent_DAL()
+				{
+					Number = tutor.Number,
+					LastName = tutor.LastName,
+					FirstName=tutor.FirstName,
+					Mail=tutor.Mail
+				}
+			);
+		}
+
+		public void updateTutor(TutorStudent tutor)
+		{
+			TutorStudent_DAL oldTutor= _tutorRepo.GetAll().FirstOrDefault(t=>t.Number==tutor.Number);
+			oldTutor.Mail = tutor.Mail;
+			oldTutor.FirstName = tutor.FirstName;
+			oldTutor.LastName = tutor.LastName;
+			_tutorRepo.update(oldTutor);
 		}
 
 		public IQueryable<TutorStudent> getAll()
@@ -32,7 +48,15 @@ namespace DomainLayer
 
 			foreach (var tutor in listDal)
 			{
-				list.Add(new TutorStudent(){LastName=tutor.LastName, Numbre=tutor.Number});
+				list.Add(
+					new TutorStudent()
+					{
+						LastName=tutor.LastName,
+						FirstName=tutor.FirstName,
+						Mail=tutor.Mail,
+						Number=tutor.Number
+					}
+				);
 			}
 
 			return list.AsQueryable();

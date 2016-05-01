@@ -13,6 +13,12 @@ namespace classLibrary.Entities
 		public String FirstName { get; set; }
 		public String LastName { get; set; }
 		public String Mail { get; set; }
-		public IEnumerable<int> PeriodKey { get; set; }
+		public virtual ICollection<TimePeriod_DAL> TimePeriod_DAL { get; set; }
+		public virtual ICollection<Session_DAL> Session_DAL { get; set; }
+		public Student_DAL()
+		{
+			TimePeriod_DAL = new List<TimePeriod_DAL>();
+			Session_DAL = new List<Session_DAL>();
+		}
 	}
 }

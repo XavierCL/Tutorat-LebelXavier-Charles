@@ -56,10 +56,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Session.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="TimePeriod.cs" />
+    <Compile Include="HelpedStudent.cs" />
     <Compile Include="TutorStudent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HelpedStudentManager.cs" />
+    <Compile Include="TimePeriodManager.cs" />
+    <Compile Include="SessionManager.cs" />
     <Compile Include="TutorStudentManager.cs" />
   </ItemGroup>
   <ItemGroup>
