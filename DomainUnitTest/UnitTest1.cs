@@ -44,6 +44,8 @@ namespace DomainUnitTest
 
 			_repo.GetAll().Returns(aList.AsQueryable());
 
+			var machin =_repo.GetAll();
+
 			Assert.AreEqual(aList.Count(), 3);
 		}
 	}

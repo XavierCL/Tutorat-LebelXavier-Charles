@@ -14,11 +14,13 @@ namespace Test1.Controller
 		private TutorStudentManager _tutorManager;
 		private TimePeriodManager _timeManager;
 		private SessionManager _sessionManager;
+		private ServiceManager _serviceManager;
 		public TutorControl()
 		{
 			_tutorManager = new TutorStudentManager();
 			_timeManager = new TimePeriodManager();
 			_sessionManager = new SessionManager();
+			_serviceManager = new ServiceManager();
 		}
 
 		public void addTutor(TimePeriod time)
@@ -54,39 +56,15 @@ namespace Test1.Controller
 			_tutorManager.updateTutor(tutor);
 		}
 
-		public int getWorkedHours(TutorStudent tutor)
-		{
-			List<Session> sessions = new List<Session>(_sessionManager.getAll().Where(t=>t.Tutor.Number==tutor.Number));
-			int index = 0;
-			while (index < sessions.Count)
-			{
-				if (sessions[index].Date > DateTime.Now) sessions.RemoveAt(index--);
-				++index;
-			}
-			return sessions.Count;
-		}
-
-		public int getFutureHours(TutorStudent tutor)
-		{
-			List<Session> sessions = new List<Session>(_sessionManager.getAll().Where(t => t.Tutor.Number == tutor.Number));
-			int index = 0;
-			while (index < sessions.Count)
-			{
-				if (sessions[index].Date < DateTime.Now) sessions.RemoveAt(index--);
-				++index;
-			}
-			return sessions.Count;
-		}
-
 		public void PrintTutorsByWorkedTime()
 		{
-			var tutors = new List<TutorStudent>(_tutorManager.getAll());
+			var tutors = _tutorManager.getAll();
 			var tutorObjects = new List<StudentHoursVO>();
 			foreach (var tutor in tutors)
 			{
 				tutorObjects.Add(new StudentHoursVO()
 				{
-					_hour=getWorkedHours(tutor),
+					_hour=_sessionManager.getWorkedHours(tutor),
 					_student = new StudentVO()
 					{
 						_firstName = tutor.FirstName,
@@ -102,47 +80,30 @@ namespace Test1.Controller
 
 		public void PrintFutureSessions()
 		{
-			List<Session> sessions = new List<Session>(_sessionManager.getAll());
-			int index = 0;
-			while (index < sessions.Count)
-			{
-				if (sessions[index].Date < DateTime.Now) sessions.RemoveAt(index--);
-				++index;
-			}
-			var listedSessions = new List<Session>();
+			IEnumerable<Session> sessions = _sessionManager.getFutureSessions();
 			var sessionObjects = new List<SessionVO>();
 			foreach (var session in sessions)
 			{
-				index = 0;
-				while (index < listedSessions.Count)
-				{
-					if (listedSessions[index].equals(session)) break;
-					++index;
-				}
-				if (index == listedSessions.Count)
-				{
-					listedSessions.Add(session);
-					sessionObjects.Add(
-						new SessionVO()
+				sessionObjects.Add(
+					new SessionVO()
+					{
+						_date = session.Date,
+						_helped = new StudentVO()
 						{
-							_date = session.Date,
-							_helped = new StudentVO()
-							{
-								_firstName = session.Helped.FirstName,
-								_lastName = session.Helped.LastName,
-								_mail = session.Helped.Mail,
-								_matricule = session.Helped.Number
-							},
-							_tutor = new StudentVO()
-							{
-								_firstName = session.Tutor.FirstName,
-								_lastName = session.Tutor.LastName,
-								_mail = session.Tutor.Mail,
-								_matricule = session.Tutor.Number
-							}
+							_firstName = session.Helped.FirstName,
+							_lastName = session.Helped.LastName,
+							_mail = session.Helped.Mail,
+							_matricule = session.Helped.Number
+						},
+						_tutor = new StudentVO()
+						{
+							_firstName = session.Tutor.FirstName,
+							_lastName = session.Tutor.LastName,
+							_mail = session.Tutor.Mail,
+							_matricule = session.Tutor.Number
 						}
-					);
-				}
+					}
+				);
 			}
 			var view = new SessionView(sessionObjects);
 			view.printView();
@@ -150,39 +111,22 @@ namespace Test1.Controller
 
 		public void PrintSelectedPeriodTutors(List<DateTime> dates)
 		{
+			var periods = _serviceManager.getFreeTutorAtDate(dates);
 			List<Student2HoursVO> studentObjects = new List<Student2HoursVO>();
-			var tutors = new List<TutorStudent>(_tutorManager.getAll());
-			foreach (var tutor in tutors)
+			foreach(var period in periods)
 			{
-				var periods =new List<TimePeriod>( _timeManager.getAllTutors().Where(p => p.Student.Number == tutor.Number));
-				int index = 0;
-				int index2;
-				while (index < periods.Count)
+				studentObjects.Add(new Student2HoursVO()
 				{
-					index2=0;
-					while(index2<dates.Count)
-					{
-						if(periods[index].Day==dates[index2].DayOfWeek && periods[index].Hour == dates[index].Hour)break;
-						++index2;
-					}
-					if(index2!=dates.Count)break;
-					++index;
-				}
-				if(index!=periods.Count)
-				{
-					studentObjects.Add(new Student2HoursVO()
-					{
-						_hour1 = getWorkedHours(tutor),
-						_hour2 = getFutureHours(tutor),
-						_student = new StudentVO()
-							{
-								_firstName = tutor.FirstName,
-								_lastName = tutor.LastName,
-								_mail = tutor.Mail,
-								_matricule = tutor.Number
-							}
-					});
-				}
+					_hour1 = _sessionManager.getWorkedHours((TutorStudent)period.Student),
+					_hour2 = _sessionManager.getFutureHours((TutorStudent)period.Student),
+					_student = new StudentVO()
+						{
+							_firstName = period.Student.FirstName,
+							_lastName = period.Student.LastName,
+							_mail = period.Student.Mail,
+							_matricule = period.Student.Number
+						}
+				});
 			}
 			var view = new Student2HoursView(studentObjects);
 			view.printView();
@@ -191,6 +135,7 @@ namespace Test1.Controller
 		public void PrintConcurentPeriods()
 		{
 			List<TutorHelpedPeriodVO> periodObjects = new List<TutorHelpedPeriodVO>();
+			//var tutors = _serviceManager.getConcurentPeriods();
 			var tutors = new List<TimePeriod>(_timeManager.getAllTutors());
 			var helpeds = new List<TimePeriod>(_timeManager.getAllHelpeds());
 			foreach(var tutor in tutors)
@@ -215,8 +160,8 @@ namespace Test1.Controller
 							},
 							tutor = new Student2HoursVO()
 							{
-								_hour1 = getWorkedHours((TutorStudent)tutor.Student),
-								_hour2 = getFutureHours((TutorStudent)tutor.Student),
+								_hour1 = _sessionManager.getWorkedHours((TutorStudent)tutor.Student),
+								_hour2 = _sessionManager.getFutureHours((TutorStudent)tutor.Student),
 								_student = new StudentVO()
 								{
 									_firstName = tutor.Student.FirstName,

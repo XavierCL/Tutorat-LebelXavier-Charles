@@ -51,5 +51,41 @@ namespace DomainLayer
 			return list.AsQueryable();
 
 		}
+
+		public int getWorkedHours(TutorStudent tutor)
+		{
+			List<Session> sessions = new List<Session>(getAll().Where(t => t.Tutor.Number == tutor.Number));
+			int index = 0;
+			while (index < sessions.Count)
+			{
+				if (sessions[index].Date > DateTime.Now) sessions.RemoveAt(index--);
+				++index;
+			}
+			return sessions.Count;
+		}
+
+		public int getFutureHours(TutorStudent tutor)
+		{
+			List<Session> sessions = new List<Session>(getAll().Where(t => t.Tutor.Number == tutor.Number));
+			int index = 0;
+			while (index < sessions.Count)
+			{
+				if (sessions[index].Date < DateTime.Now) sessions.RemoveAt(index--);
+				++index;
+			}
+			return sessions.Count;
+		}
+
+		public IEnumerable<Session> getFutureSessions()
+		{
+			List<Session> sessions = new List<Session>(getAll());
+			int index = 0;
+			while (index < sessions.Count)
+			{
+				if (sessions[index].Date < DateTime.Now) sessions.RemoveAt(index--);
+				++index;
+			}
+			return sessions;
+		}
 	}
 }
