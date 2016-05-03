@@ -24,6 +24,11 @@ namespace Test1.Controller
 			_timeManager.registerHelpedDisponibility(time);
 		}
 
+		public void addHelped(HelpedStudent student)
+		{
+			_helpedManager.registerHelped(student);
+		}
+
 		public void AddHelpeds()
 		{
 			var helpeds = _helpedManager.getAll();

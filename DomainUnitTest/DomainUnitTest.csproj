@@ -81,7 +81,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Tests_POCO.cs" />
+    <Compile Include="Tests_HelpedManager.cs" />
+    <Compile Include="Tests_TutorManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

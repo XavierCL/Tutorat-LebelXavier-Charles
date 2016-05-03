@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using classLibrary;
 using classLibrary.Entities;
 using classLibrary.EntityFramework;
+using DomainLayer.Mapping;
 
 namespace DomainLayer
 {
@@ -18,39 +19,19 @@ namespace DomainLayer
 			_timeRepo = new EFRepository<TimePeriod_DAL>(new EFTutoringDBContext());
 		}
 
+		public void setRepo(RepositoryInterface<TimePeriod_DAL> timeRepo)
+		{
+			_timeRepo = timeRepo;
+		}
+
 		public void registerTutorDisponibility(TimePeriod disponibility)
 		{
-			_timeRepo.addObject(
-				new TimePeriod_DAL()
-				{
-					Day=disponibility.Day,
-					Hour=disponibility.Hour,
-					Student_DAL=new TutorStudent_DAL(){
-						FirstName=disponibility.Student.FirstName,
-						LastName = disponibility.Student.LastName,
-						Mail=disponibility.Student.Mail,
-						Number=disponibility.Student.Number
-					}
-				}
-			);
+			_timeRepo.addObject(DalMapper.tutorPeriodToDal(disponibility));
 		}
 
 		public void registerHelpedDisponibility(TimePeriod disponibility)
 		{
-			_timeRepo.addObject(
-				new TimePeriod_DAL()
-				{
-					Day = disponibility.Day,
-					Hour = disponibility.Hour,
-					Student_DAL = new HelpedStudent_DAL()
-					{
-						FirstName = disponibility.Student.FirstName,
-						LastName = disponibility.Student.LastName,
-						Mail = disponibility.Student.Mail,
-						Number = disponibility.Student.Number
-					}
-				}
-			);
+			_timeRepo.addObject(DalMapper.helpedPeriodToDal(disponibility));
 		}
 		public IQueryable<TimePeriod> getAllTutors()
 		{
@@ -62,19 +43,7 @@ namespace DomainLayer
 			{
 				if(time.Student_DAL is TutorStudent_DAL)
 				{
-					list.Add(
-						new TimePeriod()
-						{
-							Day = time.Day,
-							Hour = time.Hour,
-							Student = new TutorStudent(){
-								FirstName=time.Student_DAL.FirstName,
-								LastName=time.Student_DAL.LastName,
-								Mail=time.Student_DAL.Mail,
-								Number=time.Student_DAL.Number
-							}
-						}
-					);
+					list.Add(DalMapper.dalToTutorPeriod(time));
 				}
 			}
 			return list.AsQueryable();
@@ -90,20 +59,7 @@ namespace DomainLayer
 			{
 				if (time.Student_DAL is HelpedStudent_DAL)
 				{
-					list.Add(
-						new TimePeriod()
-						{
-							Day = time.Day,
-							Hour = time.Hour,
-							Student = new HelpedStudent()
-							{
-								FirstName = time.Student_DAL.FirstName,
-								LastName = time.Student_DAL.LastName,
-								Mail = time.Student_DAL.Mail,
-								Number = time.Student_DAL.Number
-							}
-						}
-					);
+					list.Add(DalMapper.dalToHelpedPeriod(time));
 				}
 			}
 			return list.AsQueryable();

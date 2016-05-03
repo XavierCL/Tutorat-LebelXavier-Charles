@@ -57,6 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Managers\ServiceManager.cs" />
+    <Compile Include="Mapping\Mapper.cs" />
+    <Compile Include="POCO\SessionPeriod.cs" />
     <Compile Include="POCO\Session.cs" />
     <Compile Include="POCO\Student.cs" />
     <Compile Include="POCO\TimePeriod.cs" />

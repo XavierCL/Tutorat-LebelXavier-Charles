@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Test1.View;
 using Test1.ViewObjects;
 using DomainLayer;
+using Test1.Mapping;
 
 namespace Test1.Controller
 {
@@ -39,13 +40,7 @@ namespace Test1.Controller
 			var list = new List<StudentVO>();
 			foreach (var tutor in tutors)
 			{
-				list.Add(new StudentVO()
-				{
-					_matricule=tutor.Number,
-					_lastName=tutor.LastName,
-					_firstName=tutor.FirstName,
-					_mail=tutor.Mail
-				});
+				list.Add(VOMapper.studentToVO(tutor));
 			}
 			var view = new TutoringView(list);
 			view.printView(); ;
@@ -65,13 +60,7 @@ namespace Test1.Controller
 				tutorObjects.Add(new StudentHoursVO()
 				{
 					_hour=_sessionManager.getWorkedHours(tutor),
-					_student = new StudentVO()
-					{
-						_firstName = tutor.FirstName,
-						_lastName = tutor.LastName,
-						_mail = tutor.Mail,
-						_matricule = tutor.Number
-					}
+					_student = VOMapper.studentToVO(tutor)
 				});
 			}
 			var view = new WorkedHoursView(tutorObjects);
@@ -88,20 +77,8 @@ namespace Test1.Controller
 					new SessionVO()
 					{
 						_date = session.Date,
-						_helped = new StudentVO()
-						{
-							_firstName = session.Helped.FirstName,
-							_lastName = session.Helped.LastName,
-							_mail = session.Helped.Mail,
-							_matricule = session.Helped.Number
-						},
-						_tutor = new StudentVO()
-						{
-							_firstName = session.Tutor.FirstName,
-							_lastName = session.Tutor.LastName,
-							_mail = session.Tutor.Mail,
-							_matricule = session.Tutor.Number
-						}
+						_helped = VOMapper.studentToVO(session.Helped),
+						_tutor = VOMapper.studentToVO(session.Tutor)
 					}
 				);
 			}
@@ -119,13 +96,7 @@ namespace Test1.Controller
 				{
 					_hour1 = _sessionManager.getWorkedHours((TutorStudent)period.Student),
 					_hour2 = _sessionManager.getFutureHours((TutorStudent)period.Student),
-					_student = new StudentVO()
-						{
-							_firstName = period.Student.FirstName,
-							_lastName = period.Student.LastName,
-							_mail = period.Student.Mail,
-							_matricule = period.Student.Number
-						}
+					_student = VOMapper.studentToVO(period.Student)
 				});
 			}
 			var view = new Student2HoursView(studentObjects);
@@ -134,45 +105,25 @@ namespace Test1.Controller
 
 		public void PrintConcurentPeriods()
 		{
-			List<TutorHelpedPeriodVO> periodObjects = new List<TutorHelpedPeriodVO>();
-			//var tutors = _serviceManager.getConcurentPeriods();
-			var tutors = new List<TimePeriod>(_timeManager.getAllTutors());
-			var helpeds = new List<TimePeriod>(_timeManager.getAllHelpeds());
-			foreach(var tutor in tutors)
+			var periodObjects = new List<TutorHelpedPeriodVO>();
+			var sessionPeriods = _serviceManager.getConcurentDates();
+			foreach (var sessionPeriod in sessionPeriods)
 			{
-				foreach (var helped in helpeds)
+				periodObjects.Add(new TutorHelpedPeriodVO()
 				{
-					if (helped.equals(tutor))
+					period = new TimePeriodVO()
 					{
-						periodObjects.Add(new TutorHelpedPeriodVO()
-						{
-							period = new TimePeriodVO()
-							{
-								Day = helped.Day,
-								Hour = helped.Hour
-							},
-							helped = new StudentVO()
-							{
-								_firstName = helped.Student.FirstName,
-								_lastName = helped.Student.LastName,
-								_mail = helped.Student.Mail,
-								_matricule = helped.Student.Number
-							},
-							tutor = new Student2HoursVO()
-							{
-								_hour1 = _sessionManager.getWorkedHours((TutorStudent)tutor.Student),
-								_hour2 = _sessionManager.getFutureHours((TutorStudent)tutor.Student),
-								_student = new StudentVO()
-								{
-									_firstName = tutor.Student.FirstName,
-									_lastName = tutor.Student.LastName,
-									_mail = tutor.Student.Mail,
-									_matricule = tutor.Student.Number
-								}
-							}
-						});
+						Day = sessionPeriod.Date.Day,
+						Hour = sessionPeriod.Date.Hour
+					},
+					helped = VOMapper.studentToVO(sessionPeriod.Helped),
+					tutor = new Student2HoursVO()
+					{
+						_hour1 = _sessionManager.getWorkedHours(sessionPeriod.Tutor),
+						_hour2 = _sessionManager.getFutureHours(sessionPeriod.Tutor),
+						_student = VOMapper.studentToVO(sessionPeriod.Tutor)
 					}
-				}
+				});
 			}
 			var view = new TutorHelpedPeriodView(periodObjects);
 			view.printView();

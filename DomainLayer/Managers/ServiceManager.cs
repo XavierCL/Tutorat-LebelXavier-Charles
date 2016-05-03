@@ -9,13 +9,14 @@ namespace DomainLayer
 	public class ServiceManager
 	{
 		private TimePeriodManager _timeManager;
-		private SessionManager _sessionManager;
-		private TutorStudentManager _tutorManager;
 		public ServiceManager()
 		{
 			_timeManager = new TimePeriodManager();
-			_sessionManager = new SessionManager();
-			_tutorManager = new TutorStudentManager();
+		}
+
+		public void setRepo(TimePeriodManager timeManager)
+		{
+			_timeManager=timeManager;
 		}
 
 		public ICollection<TimePeriod> getFreeTutorAtDate(List<DateTime> dates)
@@ -34,6 +35,29 @@ namespace DomainLayer
 				++index;
 			}
 			return periods;
+		}
+
+		public ICollection<SessionPeriod> getConcurentDates()
+		{
+			var sessions = new List<SessionPeriod>();
+			var helpedPeriods = _timeManager.getAllHelpeds();
+			var tutorPeriods = _timeManager.getAllTutors();
+			foreach (var helpedPeriod in helpedPeriods)
+			{
+				foreach (var tutorPeriod in tutorPeriods)
+				{
+					if (helpedPeriod.equals(tutorPeriod))
+					{
+						sessions.Add(new SessionPeriod()
+						{
+							Date = tutorPeriod,
+							Helped = (HelpedStudent)helpedPeriod.Student,
+							Tutor = (TutorStudent)tutorPeriod.Student
+						});
+					}
+				}
+			}
+			return sessions;
 		}
 	}
 }

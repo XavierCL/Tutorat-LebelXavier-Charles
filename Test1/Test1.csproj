@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Controller\HelpedControl.cs" />
     <Compile Include="Controller\TutorControl.cs" />
+    <Compile Include="Mapping\VOMapper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewObjects\Student2Hours.cs" />

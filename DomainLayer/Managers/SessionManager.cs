@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using classLibrary;
 using classLibrary.Entities;
 using classLibrary.EntityFramework;
+using DomainLayer.Mapping;
 
 namespace DomainLayer
 {
@@ -18,6 +19,11 @@ namespace DomainLayer
 			_sessionRepo = new EFRepository<Session_DAL>(new EFTutoringDBContext());
 		}
 
+		public void setRepo(RepositoryInterface<Session_DAL> sessionRepo)
+		{
+			_sessionRepo = sessionRepo;
+		}
+
 		public IQueryable<Session> getAll()
 		{
 			var list = new List<Session>();
@@ -26,30 +32,9 @@ namespace DomainLayer
 
 			foreach (var session in listDal)
 			{
-				list.Add(
-					new Session()
-					{
-						Date=session.Date,
-						Helped=new HelpedStudent()
-						{
-							FirstName=session.HelpedStudent_DAL.FirstName,
-							LastName=session.HelpedStudent_DAL.LastName,
-							Mail=session.HelpedStudent_DAL.Mail,
-							Number=session.HelpedStudent_DAL.Number
-						},
-						Tutor = new TutorStudent()
-						{
-							FirstName = session.TutorStudent_DAL.FirstName,
-							LastName = session.TutorStudent_DAL.LastName,
-							Mail = session.TutorStudent_DAL.Mail,
-							Number = session.TutorStudent_DAL.Number
-						}
-					}
-				);
+				list.Add(DalMapper.dalToSession(session));
 			}
-
 			return list.AsQueryable();
-
 		}
 
 		public int getWorkedHours(TutorStudent tutor)

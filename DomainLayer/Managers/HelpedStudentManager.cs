@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using classLibrary;
 using classLibrary.Entities;
 using classLibrary.EntityFramework;
+using DomainLayer.Mapping;
 
 namespace DomainLayer
 {
@@ -18,36 +19,25 @@ namespace DomainLayer
 			_helpedRepo = new EFRepository<HelpedStudent_DAL>(new EFTutoringDBContext());
 		}
 
-		public void registerHelped(HelpedStudent helped)
+		public void setRepo(RepositoryInterface<HelpedStudent_DAL> helpedRepo)
 		{
-			_helpedRepo.addObject(
-				new HelpedStudent_DAL()
-				{
-					Number = helped.Number,
-					LastName = helped.LastName,
-					FirstName = helped.FirstName,
-					Mail = helped.Mail,
-				}
-			);
+			_helpedRepo=helpedRepo;
 		}
 
-		public IQueryable<TutorStudent> getAll()
+		public void registerHelped(HelpedStudent helped)
 		{
-			var list = new List<TutorStudent>();
+			_helpedRepo.addObject(DalMapper.helpedToDal(helped));
+		}
+
+		public IQueryable<HelpedStudent> getAll()
+		{
+			var list = new List<HelpedStudent>();
 
 			var listDal = _helpedRepo.GetAll();
 
 			foreach (var helped in listDal)
 			{
-				list.Add(
-					new TutorStudent()
-					{
-						LastName = helped.LastName,
-						FirstName = helped.FirstName,
-						Mail = helped.Mail,
-						Number = helped.Number
-					}
-				);
+				list.Add(DalMapper.dalToHelped(helped));
 			}
 			return list.AsQueryable();
 		}
