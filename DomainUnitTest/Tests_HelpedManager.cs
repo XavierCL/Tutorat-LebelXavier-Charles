@@ -50,7 +50,7 @@ namespace DomainUnitTest
 		}
 
 		[TestMethod]
-		public void registerTutorServiceShouldReturnRightNumbers()
+		public void registerHelpedServiceShouldReturnRightNumbers()
 		{
 			HelpedStudent t1 = new HelpedStudent()
 			{
@@ -64,7 +64,7 @@ namespace DomainUnitTest
 		}
 
 		[TestMethod]
-		public void updateTutorServiceShouldReturnRightNumbers()
+		public void updateHelpedServiceShouldReturnRightNumbers()
 		{
 			HelpedStudent_DAL t1 = new HelpedStudent_DAL()
 			{

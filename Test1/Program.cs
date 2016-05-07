@@ -21,8 +21,18 @@ namespace Test1
 			testSeeder.removeAll();
 			testSeeder.addSeeds();
 			TutorControl tutorControl = new TutorControl();
-			tutorControl.PrintFutureSessions();
-			HelpedControl helpedControl = new HelpedControl();
+			var tutors=testSeeder.getAll();
+			foreach (var tutor in tutors)
+			{
+				Console.Write(tutor.FirstName+'\n');
+				foreach (var session in tutor.Session_DAL)
+				{
+					Console.Write(session.Date.Day);
+					Console.Write(session.TutorStudent_DAL.FirstName);
+				}
+			}
+			/*tutorControl.PrintFutureSessions();
+			HelpedControl helpedControl = new HelpedControl();*/
 			Console.Write("\nOK!");
 			Console.ReadKey();
 		}

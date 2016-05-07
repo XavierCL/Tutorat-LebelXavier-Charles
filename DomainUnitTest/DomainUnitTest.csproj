@@ -81,6 +81,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Tests_SessionManager - Copy.cs" />
+    <Compile Include="Tests_SessionManager.cs" />
+    <Compile Include="Tests_TimePeriod.cs" />
     <Compile Include="Tests_POCO.cs" />
     <Compile Include="Tests_HelpedManager.cs" />
     <Compile Include="Tests_TutorManager.cs" />

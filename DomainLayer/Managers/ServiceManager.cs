@@ -26,7 +26,7 @@ namespace DomainLayer
 			while(index<periods.Count)
 			{
 				var index2 = 0;
-				while (index < dates.Count)
+				while (index2 < dates.Count)
 				{
 					if (periods[index].Day == dates[index2].DayOfWeek && periods[index].Hour == dates[index2].Hour)break;
 					++index2;

@@ -25,6 +25,11 @@ namespace testUtility
 			_periods = new EFRepository<TimePeriod_DAL>(_context);
 		}
 
+		public IQueryable<TutorStudent_DAL> getAll()
+		{
+			return _tutors.GetAll();
+		}
+
 		public void addSeeds()
 		{
 			addDisponibilities();

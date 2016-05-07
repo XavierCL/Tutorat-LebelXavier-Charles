@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test1", "Test1\Test1.csproj", "{747EC4E4-A909-41FE-9130-C108607ABDDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "Test1\Main.csproj", "{747EC4E4-A909-41FE-9130-C108607ABDDF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "classLibrary\DataLayer.csproj", "{12BCB29B-DA37-4899-833F-EA4719E38DF9}"
 EndProject
