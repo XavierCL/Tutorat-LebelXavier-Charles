@@ -32,30 +32,9 @@ namespace testUtility
 
 		public void addSeeds()
 		{
-			addDisponibilities();
 			addTutors();
 			addHelpeds();
 			addSessions();
-		}
-
-		public void addDisponibilities()
-		{
-			addDisponibility(DayOfWeek.Monday, 13, 15);
-			addDisponibility(DayOfWeek.Wednesday, 12, 14);
-			addDisponibility(DayOfWeek.Friday, 8, 12);
-			addDisponibility(DayOfWeek.Monday, 10, 12);
-			addDisponibility(DayOfWeek.Monday, 16, 18);
-			addDisponibility(DayOfWeek.Thursday, 16, 17);
-			addDisponibility(DayOfWeek.Friday, 12, 16);
-		}
-
-		public void addDisponibility(DayOfWeek day, int begin, int end)
-		{
-			while (begin < end)
-			{
-				_periods.addObject(new TimePeriod_DAL() { Day = day, Hour = begin });
-				++begin;
-			}
 		}
 
 		public void addTutors()
@@ -69,11 +48,11 @@ namespace testUtility
 			addTutor(22222, "Hamel", "Isabelle", "IH1@yopmail.com", dispo);
 			dispo = new List<TimePeriod_DAL>();
 			dispo.AddRange(getDisponibilities(DayOfWeek.Wednesday, 12, 14));
-			addTutor(22222, "Simard", "Léo", "LS1@yopmail.com", dispo);
+			addTutor(33333, "Simard", "Léo", "LS1@yopmail.com", dispo);
 			dispo = new List<TimePeriod_DAL>();
 			dispo.AddRange(getDisponibilities(DayOfWeek.Monday, 13, 15));
 			dispo.AddRange(getDisponibilities(DayOfWeek.Friday, 8, 12));
-			addTutor(33333, "Lepage", "Marc", "ML1@yopmail.com", dispo);
+			addTutor(44444, "Lepage", "Marc", "ML1@yopmail.com", dispo);
 			dispo = new List<TimePeriod_DAL>();
 			dispo.AddRange(getDisponibilities(DayOfWeek.Tuesday, 10, 12));
 			dispo.AddRange(getDisponibilities(DayOfWeek.Thursday, 16, 18));
@@ -93,6 +72,7 @@ namespace testUtility
 
 		public TimePeriod_DAL getDisponibility(DayOfWeek day, int hour)
 		{
+			return new TimePeriod_DAL() { Day = day, Hour = hour };
 			var list = _periods.GetAll();
 			foreach (var period in list)
 			{
@@ -128,6 +108,7 @@ namespace testUtility
 			dispo = new List<TimePeriod_DAL>();
 			dispo.AddRange(getDisponibilities(DayOfWeek.Wednesday, 12, 14));
 			dispo.AddRange(getDisponibilities(DayOfWeek.Friday, 10, 16));
+			addHelped(99933, "Tremblay", "Karine", "KT1@yopmail.com", dispo);
 		}
 
 		public void addHelped(int number, string lastName, string firstName, string mail, ICollection<TimePeriod_DAL> period)

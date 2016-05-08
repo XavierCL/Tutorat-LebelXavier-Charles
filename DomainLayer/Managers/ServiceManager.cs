@@ -44,8 +44,16 @@ namespace DomainLayer
 			var tutorPeriods = _timeManager.getAllTutors();
 			foreach (var helpedPeriod in helpedPeriods)
 			{
+				if (helpedPeriod.Day == DayOfWeek.Wednesday)
+				{
+					helpedPeriod.Hour = helpedPeriod.Hour;
+				}
 				foreach (var tutorPeriod in tutorPeriods)
 				{
+					if (tutorPeriod.Day == DayOfWeek.Wednesday)
+					{
+						tutorPeriod.Hour = tutorPeriod.Hour;
+					}
 					if (helpedPeriod.equals(tutorPeriod))
 					{
 						sessions.Add(new SessionPeriod()
